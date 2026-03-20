@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The OAM Design Framework · The Overachiever Mom Collective</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F9F7F2; --white: #FFFFFF; --charcoal: #2E2A24;
+    --teal: #557794; --teal-dark: #3D5A6E;
+    --blush: #EFD5D1; --blush-dark: #C9A19B;
+    --sage: #C7CEC0; --sage-dark: #7A8A74;
+    --gold: #D9B77C; --gold-dark: #B8944F;
+    --mist: #E4E7E0;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: #F9F7F2; color: var(--charcoal); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; line-height: 1.6; }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1000; opacity: 0.4;
+  }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.4rem 4rem; display: flex; align-items: center; justify-content: space-between; background: rgba(249,247,242,0.94); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(46,42,36,0.06); }
+  .nav-logo { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; font-weight: 400; }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; font-weight: 400; transition: color 0.25s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px; background: var(--teal); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta { background: var(--teal) !important; color: white !important; padding: 0.55rem 1.3rem; font-size: 0.65rem !important; letter-spacing: 0.15em !important; }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--teal-dark) !important; }
+
+  /* SHARED */
+  .eyebrow { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.1rem; }
+  .btn-primary { background: var(--charcoal); color: var(--cream); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--teal); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--charcoal); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(46,42,36,0.2); display: inline-block; transition: border-color 0.3s, color 0.3s, transform 0.2s; }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  /* HERO */
+  .hero { min-height: 88vh; padding-top: 72px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-left: 5rem; padding-right: 5rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 42%; height: 100%; background: linear-gradient(135deg, var(--blush) 0%, var(--sage) 100%); opacity: 0.28; z-index: 0; }
+  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 5.5vw, 5.2rem); font-weight: 300; line-height: 1.07; color: var(--charcoal); margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.2s; }
+  .hero h1 em { font-style: italic; color: var(--blush-dark); }
+  .hero-sub { font-size: 1rem; line-height: 1.9; color: #6a7060; max-width: 500px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s; }
+  .hero-details { display: flex; gap: 2.5rem; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.5s; }
+  .hero-detail { display: flex; flex-direction: column; gap: 0.2rem; }
+  .hero-detail-label { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(46,42,36,0.35); }
+  .hero-detail-value { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--charcoal); }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s ease forwards 0.6s; }
+  .hero-eyebrow { opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s; }
+  .hero-founding { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(217,183,124,0.12); border: 1px solid rgba(217,183,124,0.3); padding: 0.45rem 1rem; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.15s; }
+  .hero-founding span { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); }
+  .hero-founding-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: linear-gradient(to right, transparent, var(--sage), transparent); margin: 0 5rem; }
+
+  /* FOR WHO */
+  .forwho { background: var(--white); padding: 7rem 5rem; }
+  .forwho-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .forwho-left h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 1.5rem; }
+  .forwho-left h2 em { font-style: italic; color: var(--teal); }
+  .forwho-left p { font-size: 0.95rem; line-height: 1.9; color: #6a7060; margin-bottom: 1rem; }
+  .forwho-right { padding-top: 0.5rem; }
+  .forwho-item { padding: 1.5rem 0; border-bottom: 1px solid var(--mist); }
+  .forwho-item:first-child { border-top: 1px solid var(--mist); }
+  .forwho-item p {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #8a7a6a;
+    letter-spacing: 0.01em;
+  }
+
+  /* THE FRAMEWORK */
+  .framework { background: var(--charcoal); padding: 8rem 5rem; position: relative; overflow: hidden; }
+  .framework::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 80%, rgba(85,119,148,0.1) 0%, transparent 55%); pointer-events: none; }
+  .framework-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+  .framework-header { max-width: 580px; margin-bottom: 5rem; }
+  .framework-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 1rem; }
+  .framework-header h2 em { font-style: italic; color: var(--blush); }
+  .framework-header p { font-size: 0.92rem; color: rgba(249,247,242,0.45); line-height: 1.85; }
+
+  .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(255,255,255,0.07); }
+  .phase { padding: 2.5rem 2rem; border-right: 1px solid rgba(255,255,255,0.07); position: relative; transition: background 0.3s; }
+  .phase:last-child { border-right: none; }
+  .phase:hover { background: rgba(255,255,255,0.04); }
+  .phase-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 300; color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 1.25rem; display: block; }
+  .phase-label { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.6rem; }
+  .phase-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; font-style: italic; color: var(--cream); display: block; margin-bottom: 0.85rem; line-height: 1.2; }
+  .phase-desc { font-size: 0.8rem; line-height: 1.75; color: rgba(249,247,242,0.38); }
+
+  .framework-note { margin-top: 3rem; padding: 2rem 2.5rem; border: 1px solid rgba(255,255,255,0.07); display: flex; gap: 1.5rem; align-items: center; }
+  .framework-note-icon { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--gold); opacity: 0.5; flex-shrink: 0; }
+  .framework-note p { font-size: 0.82rem; line-height: 1.8; color: rgba(249,247,242,0.4); }
+  .framework-note p em { color: rgba(249,247,242,0.65); font-style: italic; }
+
+  /* DESIGN METHOD */
+  .design-method { display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.07); }
+  .design-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.3s; }
+  .design-row:last-child { border-bottom: none; }
+  .design-row:hover { background: rgba(255,255,255,0.04); }
+  .design-letter { font-family: var(--font-display); font-size: 3.8rem; font-weight: 300; color: var(--gold); opacity: 0.55; line-height: 1; text-align: center; padding: 1.75rem 0; border-right: 1px solid rgba(255,255,255,0.07); }
+  .design-content { padding: 1.75rem 2rem; }
+  .design-word { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; font-style: italic; color: var(--cream); display: block; margin-bottom: 0.4rem; }
+  .design-desc { font-size: 0.82rem; line-height: 1.75; color: rgba(249,247,242,0.42); }
+
+  /* THIS IS DIFFERENT */
+  .different { background: var(--cream); padding: 7rem 5rem; }
+  .different-inner { max-width: 960px; margin: 0 auto; }
+  .different-header { max-width: 560px; margin-bottom: 4rem; }
+  .different-header h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 0.75rem; }
+  .different-header h2 em { font-style: italic; color: var(--teal); }
+  .different-header p { font-size: 0.92rem; color: #6a7060; line-height: 1.85; }
+  .different-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .different-card { padding: 2.25rem 2rem; background: var(--white); }
+  .different-card-eyebrow { font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); display: block; margin-bottom: 0.75rem; }
+  .different-card h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.65rem; line-height: 1.3; }
+  .different-card p { font-size: 0.84rem; line-height: 1.8; color: #6a7060; }
+
+  /* INVESTMENT */
+  .investment { background: #F0F2EE; padding: 7rem 5rem; }
+  .investment-inner { max-width: 780px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .investment-left h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 1rem; }
+  .investment-left h2 em { font-style: italic; color: var(--teal); }
+  .investment-left p { font-size: 0.92rem; line-height: 1.85; color: #6a7060; margin-bottom: 1rem; }
+  .investment-right { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--mist); background: var(--white); }
+  .investment-item { padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--mist); }
+  .investment-item:last-child { border-bottom: none; }
+  .investment-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(46,42,36,0.35); display: block; margin-bottom: 0.3rem; }
+  .investment-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--charcoal); }
+  .investment-value span { font-size: 0.8rem; font-family: var(--font-body); color: #8a9085; font-weight: 300; }
+  .investment-note { font-size: 0.75rem; line-height: 1.7; color: #8a9085; margin-top: 0.25rem; }
+
+  /* APPLICATION */
+  .application { background: var(--teal); padding: 8rem 5rem; position: relative; overflow: hidden; }
+  .application::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255,255,255,0.07) 0%, transparent 65%); pointer-events: none; }
+  .application-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+  .application-header { margin-bottom: 3.5rem; }
+  .application-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 1rem; }
+  .application-header h2 em { font-style: italic; color: var(--blush); }
+  .application-header p { font-size: 0.95rem; line-height: 1.9; color: rgba(249,247,242,0.6); }
+
+  .app-form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(249,247,242,0.45); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; color: var(--cream); outline: none; transition: border-color 0.3s; resize: none; -webkit-appearance: none; }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(249,247,242,0.25); }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: rgba(255,255,255,0.4); }
+  .form-group select option { background: var(--teal-dark); color: var(--cream); }
+  .form-group textarea { min-height: 110px; }
+  .form-note { font-size: 0.75rem; line-height: 1.7; color: rgba(249,247,242,0.35); text-align: center; padding-top: 0.5rem; }
+
+  .btn-light { background: var(--cream); color: var(--charcoal); padding: 1rem 2.5rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; border: none; cursor: pointer; width: 100%; text-align: center; }
+  .btn-light:hover { background: var(--gold); transform: translateY(-2px); }
+
+  /* SUCCESS STATE */
+  .form-success { display: none; text-align: center; padding: 3rem 2rem; }
+  .form-success h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 1rem; }
+  .form-success p { font-size: 0.92rem; color: rgba(249,247,242,0.6); line-height: 1.85; }
+
+  /* FOOTER */
+  footer { background: #211E19; padding: 4.5rem 5rem 3rem; }
+  .footer-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 2rem; }
+  .footer-brand { font-family: var(--font-display); font-size: 1.1rem; color: var(--cream); letter-spacing: 0.12em; margin-bottom: 0.6rem; }
+  .footer-brand span { color: var(--gold); }
+  .footer-tagline { font-size: 0.8rem; line-height: 1.8; color: rgba(249,247,242,0.35); margin-bottom: 1.5rem; max-width: 220px; }
+  .footer-social { display: flex; gap: 0.6rem; }
+  .footer-social a { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(249,247,242,0.4); text-decoration: none; font-size: 0.58rem; letter-spacing: 0.07em; text-transform: uppercase; transition: border-color 0.3s, color 0.3s; }
+  .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col h4 { font-size: 0.57rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(249,247,242,0.28); margin-bottom: 1.25rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.7rem; }
+  .footer-col ul li a { font-size: 0.82rem; color: rgba(249,247,242,0.48); text-decoration: none; transition: color 0.25s; }
+  .footer-col ul li a:hover { color: var(--cream); }
+  .footer-bottom { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .footer-bottom p { font-size: 0.63rem; color: rgba(249,247,242,0.22); letter-spacing: 0.06em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.22s; }
+  .reveal-d3 { transition-delay: 0.34s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero { padding: 6rem 2rem 4rem; }
+    .forwho,.framework,.different,.investment,.application { padding: 5rem 2rem; }
+    .forwho-inner,.investment-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .phases { grid-template-columns: 1fr 1fr; }
+    .phase { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .different-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 3rem 2rem 2rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">The Overachiever Mom <span>Collective</span></a>
+  <ul class="nav-links">
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="oam-human-design.html">Discover Your Design</a></li>
+    <li><a href="framework.html">The Framework</a></li>
+    <li><a href="#apply" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-founding">
+      <div class="hero-founding-dot"></div>
+      <span>Founding Cohort · Now Accepting Applications</span>
+    </div>
+    <span class="eyebrow hero-eyebrow">The OAM Design Framework</span>
+    <h1>An experience<br>designed around<br><em>who you're becoming.</em></h1>
+    <p class="hero-sub">Not a course. Not a coaching program. A guided design process for the woman who's done surviving her life and ready to build something that actually fits.</p>
+    <div class="hero-details">
+      <div class="hero-detail">
+        <span class="hero-detail-label">Duration</span>
+        <span class="hero-detail-value">10 Weeks</span>
+      </div>
+      <div class="hero-detail">
+        <span class="hero-detail-label">Format</span>
+        <span class="hero-detail-value">1:1 · Intimate</span>
+      </div>
+      <div class="hero-detail">
+        <span class="hero-detail-label">Cohort Size</span>
+        <span class="hero-detail-value">2–3 Women</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#apply" class="btn-primary">Apply for the Founding Cohort</a>
+      <a href="#framework" class="btn-secondary">See the Framework</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOR WHO -->
+<section class="forwho">
+  <div class="forwho-inner">
+    <div class="forwho-left reveal">
+      <span class="eyebrow">Who this is for</span>
+      <h2>You've built<br>a life. Now<br>let's <em>design</em> one.</h2>
+      <p>The OAM Design Framework is for the woman who has built a life — and is quietly wondering why it still doesn't feel quite right.</p>
+      <p>She's not broken. She's not ungrateful. She's just ready for something more intentional than what she's been running.</p>
+    </div>
+    <div class="forwho-right reveal reveal-d1">
+      <div class="forwho-item">
+        <p>You feel the weight of overload — but you've been carrying it so long it just feels like life.</p>
+      </div>
+      <div class="forwho-item">
+        <p>You've achieved a lot, and still sense that something essential is missing.</p>
+      </div>
+      <div class="forwho-item">
+        <p>You're tired of putting yourself last — and ready to actually do something about it.</p>
+      </div>
+      <div class="forwho-item">
+        <p>You want support that meets you where you are, not a curriculum built for someone else.</p>
+      </div>
+      <div class="forwho-item">
+        <p>You're ready to invest in yourself — not just your career, your family, or the next goal on the list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE FRAMEWORK -->
+<section class="framework" id="framework">
+  <div class="framework-inner">
+    <div class="framework-header reveal">
+      <span class="eyebrow">The journey</span>
+      <h2>The <em>DESIGN</em> Method.</h2>
+      <p>This is the path you move through inside the OAM Design Framework. Six intentional steps — from naming what you're carrying to building what comes next.</p>
+    </div>
+    <div class="design-method reveal reveal-d1">
+      <div class="design-row">
+        <span class="design-letter">D</span>
+        <div class="design-content">
+          <span class="design-word">Define the Overload</span>
+          <p class="design-desc">We name what you're carrying.</p>
+        </div>
+      </div>
+      <div class="design-row">
+        <span class="design-letter">E</span>
+        <div class="design-content">
+          <span class="design-word">Examine the System</span>
+          <p class="design-desc">You begin to understand the root cause of it all.</p>
+        </div>
+      </div>
+      <div class="design-row">
+        <span class="design-letter">S</span>
+        <div class="design-content">
+          <span class="design-word">Step Back</span>
+          <p class="design-desc">Experience the intentional pause.</p>
+        </div>
+      </div>
+      <div class="design-row">
+        <span class="design-letter">I</span>
+        <div class="design-content">
+          <span class="design-word">Identify Alignment</span>
+          <p class="design-desc">Understand the blueprint for how you're wired to live.</p>
+        </div>
+      </div>
+      <div class="design-row">
+        <span class="design-letter">G</span>
+        <div class="design-content">
+          <span class="design-word">Generate Possibilities</span>
+          <p class="design-desc">Reimagine life on your terms.</p>
+        </div>
+      </div>
+      <div class="design-row">
+        <span class="design-letter">N</span>
+        <div class="design-content">
+          <span class="design-word">Navigate Forward</span>
+          <p class="design-desc">Apply what you've designed and move forward — with intention, not momentum.</p>
+        </div>
+      </div>
+    </div>
+    <div class="framework-note reveal reveal-d2">
+      <span class="framework-note-icon">"</span>
+      <p>The full details of each step belong to the women inside the program. What you need to know is this — <em>you will not leave the same way you arrived.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- THIS IS DIFFERENT -->
+<section class="different">
+  <div class="different-inner">
+    <div class="different-header reveal">
+      <span class="eyebrow">What holds you through it</span>
+      <h2>Three things built<br>to carry you —<br>not just <em>guide you.</em></h2>
+      <p>Most programs give you information. This one gives you something to stand on. Each element of the OAM Design Framework was chosen because it does something specific — for you, in you, and with you.</p>
+    </div>
+    <div class="different-grid">
+      <div class="different-card reveal reveal-d1">
+        <span class="different-card-eyebrow">The container</span>
+        <h3>Small by design. Held by intention.</h3>
+        <p>Two to three women. No audience. No performance. Just a space where you can finally tell the truth about what you're carrying — and be met there without judgment. You've spent a long time being everything for everyone. This is the room where you get to just be.</p>
+      </div>
+      <div class="different-card reveal reveal-d2">
+        <span class="different-card-eyebrow">The blueprint</span>
+        <h3>Human Design isn't a label. It's a mirror.</h3>
+        <p>For the first time, you'll understand why certain things have always felt like a drain — and why others have always felt like home. Your chart reveals how you're naturally wired to make decisions, manage energy, and move through the world. Not how you've been conditioned to. How you actually are.</p>
+      </div>
+      <div class="different-card reveal reveal-d3">
+        <span class="different-card-eyebrow">The capstone</span>
+        <h3>You close the journey alone — on purpose.</h3>
+        <p>The solo reflection experience isn't a reward. It's part of the design. After ten weeks of doing the work, you deserve space that belongs only to you — to sit with what you've uncovered, feel what it means, and step forward as the woman you've been designing toward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section class="investment">
+  <div class="investment-inner">
+    <div class="investment-left reveal">
+      <span class="eyebrow">Ready to take the next step?</span>
+      <h2>A space held<br>just for <em>you.</em></h2>
+      <p>The Founding Cohort is intentionally small and intentional to reflect both the intimate nature of the experience and the opportunity to be part of something at the beginning.</p>
+      <p>Founding members help shape what this becomes. That matters to me — and I hope it matters to you too.</p>
+    </div>
+    <div class="investment-right reveal reveal-d1">
+      <div class="investment-item">
+        <span class="investment-label">Program Investment</span>
+        <div class="investment-value">$1,000 <span>· Founding Cohort Opportunity</span></div>
+        <p class="investment-note">Payment plans available — we'll discuss during outreach.</p>
+      </div>
+      <div class="investment-item">
+        <span class="investment-label">What's included</span>
+        <div class="investment-value" style="font-size: 0.88rem; font-family: var(--font-body); font-weight: 300; line-height: 1.8; color: #6a7060;">Guided 1:1 work · Human Design integration · Capstone solo reflection experience · Direct access to me throughout</div>
+      </div>
+      <div class="investment-item">
+        <span class="investment-label">Cohort size</span>
+        <div class="investment-value">2–3 Women <span>· by application only</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section class="application" id="apply">
+  <div class="application-inner">
+    <div class="application-header reveal">
+      <span class="eyebrow" style="color: rgba(249,247,242,0.4);">Apply · Founding Cohort</span>
+      <h2>Tell me a little<br>about <em>you.</em></h2>
+      <p>This isn't a formal application. It's a conversation starter. Share what feels right — I'll review every submission personally and reach out to connect.</p>
+    </div>
+
+    <div id="form-wrap">
+      <form class="app-form reveal reveal-d1" id="app-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="Where I can reach you" required>
+        </div>
+        <div class="form-group">
+          <label>Tell me a little about who you are</label>
+          <textarea placeholder="Where are you in life right now? What do you do, what does your world look like? No need to be formal — just be honest." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Why this, why now?</label>
+          <textarea placeholder="What brought you here? What's making this feel like the right moment?" required></textarea>
+        </div>
+        <button type="submit" class="btn-light">I'm Ready — Let's Start the Conversation</button>
+        <p class="form-note">I review every application personally and will be in touch within a few days. This is the beginning of a conversation — not a decision.</p>
+      </form>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <h3>It's in. Thank you.</h3>
+      <p>I'll review your application personally and reach out within a few days. In the meantime — you did something for yourself today. That matters.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">The Overachiever Mom <span>Collective</span></div>
+      <p class="footer-tagline">Designing your life with intention. For the woman ready for what's next.</p>
+      <div class="footer-social">
+        <a href="#">IG</a>
+        <a href="#">LI</a>
+        <a href="#">PO</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="speaking.html">Speaking</a></li>
+        <li><a href="framework.html">The OAM Design Framework</a></li>
+        <li><a href="oam-human-design.html">Discover Your Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">To the Woman It May Concern · Podcast</a></li>
+        <li><a href="#">Substack</a></li>
+        <li><a href="#apply">Work With Me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 The Overachiever Mom Collective · Jasmine Bibb · All rights reserved.</p>
+    <p>Designing your life with intention.</p>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>
