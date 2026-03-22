@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The OAM Collective · Designing Your Life With Intention</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F9F7F2;
+    --white: #FFFFFF;
+    --charcoal: #2E2A24;
+    --teal: #557794;
+    --teal-dark: #3D5A6E;
+    --blush: #EFD5D1;
+    --blush-dark: #C9A19B;
+    --sage: #C7CEC0;
+    --sage-dark: #7A8A74;
+    --gold: #D9B77C;
+    --gold-dark: #B8944F;
+    --mist: #E4E7E0;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1000; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    padding: 1.4rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(249,247,242,0.94);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(46,42,36,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .nav-logo span { color: var(--teal); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.25s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--teal);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    background: var(--teal) !important;
+    color: white !important;
+    padding: 0.55rem 1.3rem;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.15em !important;
+  }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--teal-dark) !important; }
+
+  /* ── SHARED ── */
+  .eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1.1rem;
+  }
+
+  .btn-primary {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal); transform: translateY(-2px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--charcoal);
+    padding: 0.9rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(46,42,36,0.2);
+    display: inline-block;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding-top: 72px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 4rem 7rem 5rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-bridge {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--charcoal);
+    max-width: 400px;
+    margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.55s;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.2s;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal); }
+
+  .hero-sub {
+    font-size: 0.98rem;
+    line-height: 1.9;
+    color: #6a7060;
+    max-width: 420px;
+    margin-bottom: 2.75rem;
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.7s;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.9s ease forwards 0.8s;
+  }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: linear-gradient(150deg, var(--sage) 0%, var(--mist) 45%, var(--blush) 100%);
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--cream) 0%, transparent 18%);
+    z-index: 1;
+  }
+
+  .hero-photo-area {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+  }
+
+  .hero-photo-placeholder {
+    width: 220px; height: 290px;
+    border: 1px dashed rgba(46,42,36,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo-placeholder span {
+    font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase;
+    color: rgba(46,42,36,0.28); text-align: center; line-height: 1.9; padding: 0 1rem;
+  }
+
+  .hero-watermark {
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 24rem; font-weight: 300;
+    color: rgba(46,42,36,0.035);
+    bottom: -4rem; right: -1rem;
+    line-height: 1; pointer-events: none; user-select: none; z-index: 1;
+  }
+
+  /* ── OAM DEFINITION ── */
+  .oam-intro {
+    background: var(--charcoal);
+    padding: 7rem 5rem;
+    position: relative; overflow: hidden;
+  }
+
+  .oam-intro::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(85,119,148,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .oam-intro-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  .oam-intro-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .oam-intro-header .eyebrow {
+    color: var(--gold);
+  }
+
+  .oam-definition-block {
+    position: relative; z-index: 1;
+    max-width: 660px; width: 100%;
+    padding: 3.5rem 4rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+  }
+
+  .oam-definition-block::before {
+    content: '';
+    position: absolute;
+    top: 0.6rem; left: 0.6rem; right: 0.6rem; bottom: 0.6rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+
+  .oam-definition-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(249,247,242,0.85);
+  }
+  .oam-definition-text em { font-style: italic; color: var(--blush); }
+
+  .oam-formula-char {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .oam-formula-word {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.01em;
+  }
+
+  .oam-formula-note {
+    font-size: 0.82rem;
+    color: #8a9085;
+    line-height: 1.7;
+  }
+
+  .oam-formula-footer {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--mist);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #8a9085;
+    letter-spacing: 0.01em;
+  }
+  .oam-formula-footer em { font-style: italic; color: var(--charcoal); }
+
+  /* ── OAM PERSONAS ── */
+  .personas {
+    background: var(--cream);
+    padding: 7rem 5rem;
+    border-top: 1px solid var(--mist);
+  }
+
+  .personas-inner {
+    max-width: 960px; margin: 0 auto;
+  }
+
+  .personas-header {
+    max-width: 560px;
+    margin-bottom: 3.5rem;
+  }
+
+  .personas-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 0.75rem;
+  }
+  .personas-header h2 em { font-style: italic; color: var(--teal); }
+  .personas-header p { font-size: 0.92rem; color: #6a7060; line-height: 1.8; }
+
+  .personas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .persona-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-top: 2px solid transparent;
+  }
+  .persona-card:nth-child(1) { border-top-color: var(--teal); }
+  .persona-card:nth-child(2) { border-top-color: var(--gold); }
+  .persona-card:nth-child(3) { border-top-color: var(--blush-dark); }
+
+  .persona-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.85rem;
+  }
+  .persona-card:nth-child(1) .persona-label { color: var(--teal); }
+  .persona-card:nth-child(2) .persona-label { color: var(--gold-dark); }
+  .persona-card:nth-child(3) .persona-label { color: var(--blush-dark); }
+
+  .persona-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--charcoal);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .persona-desc {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: #6a7060;
+    margin-bottom: 1.25rem;
+  }
+
+  .persona-truth {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--charcoal);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--mist);
+    line-height: 1.65;
+  }
+
+  .personas-footer {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--mist);
+    text-align: center;
+  }
+
+  .personas-footer p {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #6a7060;
+    line-height: 1.75;
+  }
+  .personas-footer p em { color: var(--charcoal); font-style: normal; }
+
+  /* ── ABOUT JASMINE ── */
+  .about {
+    background: var(--cream);
+    padding: 8rem 5rem;
+  }
+
+  .about-inner {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.45fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .about-photo {
+    position: relative;
+  }
+
+  .about-photo-bg {
+    background: linear-gradient(145deg, var(--mist) 0%, var(--sage) 50%, var(--blush) 100%);
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .about-accent {
+    position: absolute;
+    bottom: -1.25rem; right: -1.25rem;
+    width: 100px; height: 100px;
+    background: var(--gold); opacity: 0.12;
+    z-index: -1;
+  }
+
+  .about-right h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+  .about-right h2 em { font-style: italic; color: var(--teal); }
+
+  .about-right p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #6a7060;
+    margin-bottom: 1rem;
+  }
+
+  .credential-wrap {
+    display: flex; flex-wrap: wrap; gap: 0.45rem;
+    margin: 1.75rem 0 2rem;
+  }
+
+  .cred-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.38rem 0.8rem;
+    border: 1px solid var(--mist);
+    color: var(--sage-dark);
+    background: var(--white);
+  }
+
+  /* ── THREE DOORS ── */
+  .doors {
+    background: #F0F2EE;
+    padding: 8rem 5rem;
+  }
+
+  .doors-inner { max-width: 960px; margin: 0 auto; }
+
+  .doors-header {
+    max-width: 560px; margin-bottom: 3.5rem;
+  }
+  .doors-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--charcoal);
+    margin-bottom: 0.75rem;
+  }
+  .doors-header h2 em { font-style: italic; color: var(--teal); }
+  .doors-header p { font-size: 0.9rem; color: #6a7068; line-height: 1.8; }
+
+  .doors-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .door-card {
+    background: var(--white);
+    padding: 2.5rem 2rem 2rem;
+    text-decoration: none; color: var(--charcoal);
+    display: flex; flex-direction: column;
+    border-top: 2px solid transparent;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .door-card:nth-child(1) { border-top-color: var(--teal); }
+  .door-card:nth-child(2) { border-top-color: var(--gold); }
+  .door-card:nth-child(3) { border-top-color: var(--blush-dark); }
+  .door-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(46,42,36,0.08); }
+
+  .door-label {
+    font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1rem; display: block;
+  }
+  .door-card:nth-child(1) .door-label { color: var(--teal); }
+  .door-card:nth-child(2) .door-label { color: var(--gold-dark); }
+  .door-card:nth-child(3) .door-label { color: var(--blush-dark); }
+
+  .door-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem; font-weight: 400;
+    line-height: 1.22; margin-bottom: 0.85rem;
+  }
+
+  .door-card p {
+    font-size: 0.84rem; line-height: 1.8;
+    color: #6a7060; flex: 1; margin-bottom: 1.75rem;
+  }
+
+  .door-link {
+    font-size: 0.63rem; letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--charcoal); display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: auto; transition: gap 0.2s;
+    text-decoration: none;
+  }
+  .door-card:hover .door-link { gap: 0.85rem; }
+
+  /* ── MANIFESTO ── */
+  .manifesto {
+    background: var(--teal);
+    padding: 6rem 5rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .manifesto::before {
+    content: '\201C';
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 36rem; font-weight: 300;
+    color: rgba(255,255,255,0.04);
+    top: -8rem; left: -1rem; line-height: 1;
+    pointer-events: none;
+  }
+
+  .manifesto blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+    font-weight: 300; font-style: italic;
+    color: white; line-height: 1.5;
+    max-width: 760px; margin: 0 auto 1.25rem;
+    position: relative; z-index: 1;
+  }
+
+  .manifesto cite {
+    font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); font-style: normal;
+    display: block; position: relative; z-index: 1;
+  }
+
+  /* ── PROOF ── */
+  .proof {
+    background: var(--cream);
+    padding: 7rem 5rem;
+  }
+  .proof-inner { max-width: 960px; margin: 0 auto; }
+
+  .proof-header { margin-bottom: 3rem; }
+  .proof-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 2.8vw, 2.6rem);
+    font-weight: 300; color: var(--charcoal);
+  }
+  .proof-header h2 em { font-style: italic; color: var(--teal); }
+
+  .proof-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem; margin-bottom: 3.5rem;
+  }
+
+  .proof-card {
+    background: var(--white); padding: 2rem 1.75rem;
+    border-left: 2px solid var(--sage);
+  }
+
+  .proof-quote {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-style: italic;
+    line-height: 1.7; color: var(--charcoal); margin-bottom: 1.25rem;
+  }
+
+  .proof-attr {
+    font-size: 0.62rem; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--sage-dark);
+  }
+
+  .proof-placeholder {
+    background: linear-gradient(135deg, var(--mist) 0%, var(--sage) 100%);
+    display: flex; align-items: center; justify-content: center; min-height: 180px;
+  }
+  .proof-placeholder p {
+    font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase;
+    color: rgba(46,42,36,0.28); text-align: center; line-height: 2.2;
+  }
+
+  .cred-strip {
+    display: flex; align-items: center; justify-content: center;
+    gap: 4rem; flex-wrap: wrap;
+    padding-top: 3rem; border-top: 1px solid var(--mist);
+  }
+  .cred-item {
+    text-align: center; font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--sage-dark); line-height: 1.6;
+  }
+  .cred-item strong {
+    display: block; font-family: var(--font-display);
+    font-size: 1.5rem; font-weight: 300; color: var(--charcoal);
+    letter-spacing: 0; margin-bottom: 0.2rem;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--blush);
+    padding: 7rem 5rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .final-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    font-weight: 300; color: var(--charcoal);
+    line-height: 1.2; margin-bottom: 1.25rem;
+    position: relative; z-index: 1;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--teal); }
+
+  .final-cta p {
+    font-size: 0.95rem; color: #6a5a58;
+    line-height: 1.9; max-width: 500px;
+    margin: 0 auto 2.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .final-actions {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #211E19;
+    padding: 4.5rem 5rem 3rem;
+  }
+
+  .footer-inner {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand {
+    font-family: var(--font-display); font-size: 1.1rem;
+    color: var(--cream); letter-spacing: 0.12em; margin-bottom: 0.6rem;
+  }
+  .footer-brand span { color: var(--gold); }
+
+  .footer-tagline {
+    font-size: 0.8rem; line-height: 1.8;
+    color: rgba(249,247,242,0.35); margin-bottom: 1.5rem; max-width: 220px;
+  }
+
+  .footer-social { display: flex; gap: 0.6rem; }
+  .footer-social a {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(249,247,242,0.4); text-decoration: none;
+    font-size: 0.58rem; letter-spacing: 0.07em; text-transform: uppercase;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+  .footer-col h4 {
+    font-size: 0.57rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(249,247,242,0.28); margin-bottom: 1.25rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.7rem; }
+  .footer-col ul li a {
+    font-size: 0.82rem; color: rgba(249,247,242,0.48); text-decoration: none; transition: color 0.25s;
+  }
+  .footer-col ul li a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    max-width: 960px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-bottom p { font-size: 0.63rem; color: rgba(249,247,242,0.22); letter-spacing: 0.06em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.22s; }
+  .reveal-d3 { transition-delay: 0.34s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 5rem 2rem 4rem; }
+    .oam-intro,.personas,.about,.doors,.proof,.final-cta { padding: 5rem 2rem; }
+    .personas-grid,.doors-grid,.proof-grid { grid-template-columns: 1fr; }
+    .cred-strip { gap: 2rem; }
+    footer { padding: 3rem 2rem 2rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">The Overachiever Mom <span>Collective</span></a>
+  <ul class="nav-links">
+    <li><a href="speaking.html">Speaking</a></li>
+    <li><a href="oam-human-design.html">Discover Your Design</a></li>
+    <li><a href="framework.html">The Framework</a></li>
+    <li><a href="speaking.html#book" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1>For the woman<br>who's ready to<br>design something<br><em>different.</em></h1>
+    <p class="hero-bridge">You've worked hard for this life. So why does it still feel like something's missing?</p>
+    <p class="hero-sub">You've been leading at work, leading at home, and somewhere in the middle of all of it — wondering if this is really all there is. It's not.<br><br><strong><em>This is the space for what comes next.</em></strong></p>
+    <div class="hero-actions">
+      <a href="speaking.html" class="btn-primary">Invite Me to Speak</a>
+      <a href="oam-human-design.html" class="btn-secondary">Discover Your Design</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-area">
+      <div class="hero-photo-placeholder">
+        <span>Brand photo<br>of Jasmine here</span>
+      </div>
+    </div>
+    <div class="hero-watermark">OAM</div>
+  </div>
+</section>
+
+<!-- OAM INTRO -->
+<section class="oam-intro">
+  <div class="oam-intro-inner">
+    <div class="oam-intro-header reveal">
+      <span class="eyebrow">An Overachiever Mom is...</span>
+    </div>
+    <div class="oam-definition-block reveal">
+      <p class="oam-definition-text">...the woman who has poured herself into a life she has worked hard to build. She's capable. She's committed. She's also starting to realize that capable women get to want more — and that wanting more doesn't make her ungrateful. It makes her <em>ready.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- OAM PERSONAS -->
+<section class="personas">
+  <div class="personas-inner">
+    <div class="personas-header reveal">
+      <span class="eyebrow">She comes in many forms.</span>
+      <h2>But her story always finds<br><em>the same truth.</em></h2>
+      <p>The Overachiever Mom isn't a single story. She's a spirit. She reaches — regardless of where she started or what the path looked like. <strong>Can you relate?</strong></p>
+    </div>
+    <div class="personas-grid">
+      <div class="persona-card reveal reveal-d1">
+        <span class="persona-name">The Climber</span>
+        <p class="persona-desc">She followed the traditional path — school, career, marriage, kids, climb. She's done everything right and arrived somewhere that looks like success. And she still feels the gap between the life she built and the one she imagined.</p>
+        <p class="persona-truth">"I've checked every box. Why does it still feel like something's missing?"</p>
+      </div>
+      <div class="persona-card reveal reveal-d2">
+        <span class="persona-name">The Builder</span>
+        <p class="persona-desc">She didn't have the straight path — but she created one. Life handed her detours and she turned them into roads. She's resourceful, resilient, and has carried more than most people will ever know.</p>
+        <p class="persona-truth">"I built this from nothing. I know I'm capable of more — I just need space to figure out what that is."</p>
+      </div>
+      <div class="persona-card reveal reveal-d3">
+        <span class="persona-name">The Juggler</span>
+        <p class="persona-desc">She's deep in the middle of it right now — kids, career, maybe a dream she keeps deferring. She hasn't arrived anywhere yet. She's holding everything together and quietly wondering when it gets to be about her.</p>
+        <p class="persona-truth">"I know there's more for me. I just can't see it from where I'm standing."</p>
+      </div>
+    </div>
+    <div class="personas-footer reveal">
+      <p>Different paths. Different stories. One shared truth — <em>overload.</em><br>And one shared destination — The Overachiever Mom Collective.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT JASMINE -->
+<section class="about">
+  <div class="about-inner">
+    <div class="about-photo reveal">
+      <div class="about-photo-bg">
+        <div style="width:150px;height:185px;border:1px dashed rgba(46,42,36,0.15);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:0.57rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(46,42,36,0.26);text-align:center;line-height:1.9;padding:0 0.75rem;">Photo of<br>Jasmine here</span>
+        </div>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-right reveal reveal-d1">
+      <span class="eyebrow">The woman behind the work</span>
+      <h2>I didn't build this<br>from the <em>other side.</em><br>I built it from<br>inside it.</h2>
+      <p>I'm Jasmine Bibb — life design strategist, Human Design guide, speaker, and founder of The Overachiever Mom Collective. For over 15 years I've led teams, built products, driven outcomes, and shown up fully in corporate spaces — all while navigating the beautiful, yet demanding realities of motherhood and everything in between.</p>
+      <p>I was able to build The Overachiever Mom Collective when I got honest enough to name what I was carrying and brave enough to start designing something different. I decided that awareness without action wasn't enough — and that the women around me deserved a framework to truly give their purpose a chance.</p>
+      <div class="credential-wrap">
+        <span class="cred-tag">Life Design Strategist</span>
+        <span class="cred-tag">Human Design Guide</span>
+        <span class="cred-tag">15+ Yrs Corporate Leadership</span>
+        <span class="cred-tag">Speaker & Facilitator</span>
+        <span class="cred-tag">Founder, OAM Collective</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE DOORS -->
+<section class="doors">
+  <div class="doors-inner">
+    <div class="doors-header reveal">
+      <span class="eyebrow">Where would you like to begin?</span>
+      <h2>Three ways to step into<br><em>The OAM Collective</em></h2>
+      <p>Whether you're an event organizer, a woman ready to do the work, or just starting to explore — there's a place for where you are right now.</p>
+    </div>
+    <div class="doors-grid">
+      <a href="speaking.html" class="door-card reveal reveal-d1">
+        <span class="door-label">For event organizers</span>
+        <h3>Invite Me to Speak</h3>
+        <p>A voice that speaks from inside the experience — bringing the conversation about overload, identity, and intentional design to stages, boardrooms, and the corporate discussions where retaining this particular woman matters most.</p>
+        <span class="door-link">Let's collaborate →</span>
+      </a>
+      <a href="framework.html" class="door-card reveal reveal-d2">
+        <span class="door-label">For women ready to design</span>
+        <h3>The OAM Design Framework</h3>
+        <p>For the woman who's ready to transition from overload to intentional design. Curated to meet you where you are — focused around who you're becoming.</p>
+        <span class="door-link">Explore the program →</span>
+      </a>
+      <a href="oam-human-design.html" class="door-card reveal reveal-d3">
+        <span class="door-label">Free · Start here</span>
+        <h3>Discover Your Human Design</h3>
+        <p>Not a personality test. The first real language for who you've always been — and a blueprint for who you're becoming. Start with your type.</p>
+        <span class="door-link">Find my type →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <blockquote class="reveal">"Holding it all together and being whole are not the same thing. One is survival. The other is design."</blockquote>
+  <cite class="reveal reveal-d1">— Jasmine Bibb · Founder, The OAM Collective</cite>
+</section>
+
+<!-- PROOF -->
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-header reveal">
+      <span class="eyebrow">What women are saying</span>
+      <h2>The work <em>speaks</em> for itself.</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card reveal reveal-d1">
+        <p class="proof-quote">"She doesn't just inspire you — she gives you a real framework to move forward. Jasmine has a way of naming exactly what you've been feeling but couldn't say out loud."</p>
+        <span class="proof-attr">— Add your testimonial here</span>
+      </div>
+      <div class="proof-card reveal reveal-d2">
+        <p class="proof-quote">"I walked into that room carrying a lot and walked out with clarity. She speaks from inside the experience — and that changes everything about how it lands."</p>
+        <span class="proof-attr">— Add your testimonial here</span>
+      </div>
+      <div class="proof-placeholder reveal reveal-d3">
+        <p>Your third<br>testimonial<br>goes here</p>
+      </div>
+    </div>
+    <div class="cred-strip reveal">
+      <div class="cred-item"><strong>15+</strong>Years in Corporate Leadership</div>
+      <div class="cred-item"><strong>HD</strong>Human Design Guide</div>
+      <div class="cred-item"><strong>OAM</strong>Collective Founder</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="reveal">You already know<br>this isn't <em>all there is.</em></h2>
+  <p class="reveal reveal-d1">The question isn't whether you're capable. You've already proven that. The question is what you want to do with what comes next — and whether you're ready to design it intentionally.</p>
+  <div class="final-actions reveal reveal-d2">
+    <a href="oam-human-design.html" class="btn-primary">Start With Your Design</a>
+    <a href="framework.html" class="btn-secondary">Explore The Framework</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">The OAM <span>Collective</span></div>
+      <p class="footer-tagline">Designing your life with intention. For the woman ready for what's next.</p>
+      <div class="footer-social">
+        <a href="#">IG</a>
+        <a href="#">LI</a>
+        <a href="#">PO</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="speaking.html">Speaking</a></li>
+        <li><a href="framework.html">The OAM Design Framework</a></li>
+        <li><a href="oam-human-design.html">Discover Your Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">To the Woman It May Concern · Podcast</a></li>
+        <li><a href="#">Substack</a></li>
+        <li><a href="speaking.html#book">Work With Me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 The OAM Collective · Jasmine Bibb · All rights reserved.</p>
+    <p>Designing your life with intention.</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
