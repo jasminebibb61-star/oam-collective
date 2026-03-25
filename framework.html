@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The OAM Design Framework · The Overachiever Mom Collective</title>
+<title>Speaking Â· Jasmine Bibb Â· The Overachiever Mom Collective</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --cream: #F9F7F2; --white: #FFFFFF; --charcoal: #2E2A24;
+    --cream: #F9F7F2; --white: #FFFFFF;--charcoal: #2E2A24;
     --teal: #557794; --teal-dark: #3D5A6E;
     --blush: #EFD5D1; --blush-dark: #C9A19B;
     --sage: #C7CEC0; --sage-dark: #7A8A74;
@@ -43,143 +43,109 @@
 
   /* SHARED */
   .eyebrow { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.1rem; }
-  .btn-primary { background: var(--charcoal); color: var(--cream); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; border: none; cursor: pointer; }
+  .btn-primary { background: var(--charcoal); color: var(--cream); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; }
   .btn-primary:hover { background: var(--teal); transform: translateY(-2px); }
   .btn-secondary { background: transparent; color: var(--charcoal); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(46,42,36,0.2); display: inline-block; transition: border-color 0.3s, color 0.3s, transform 0.2s; }
   .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
 
   /* HERO */
-  .hero { min-height: 88vh; padding-top: 72px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-left: 5rem; padding-right: 5rem; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 42%; height: 100%; background: linear-gradient(135deg, var(--blush) 0%, var(--sage) 100%); opacity: 0.28; z-index: 0; }
-  .hero-content { position: relative; z-index: 1; max-width: 680px; }
-  .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 5.5vw, 5.2rem); font-weight: 300; line-height: 1.07; color: var(--charcoal); margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.2s; }
-  .hero h1 em { font-style: italic; color: var(--blush-dark); }
-  .hero-sub { font-size: 1rem; line-height: 1.9; color: #6a7060; max-width: 500px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s; }
-  .hero-details { display: flex; gap: 2.5rem; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.5s; }
-  .hero-detail { display: flex; flex-direction: column; gap: 0.2rem; }
-  .hero-detail-label { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(46,42,36,0.35); }
-  .hero-detail-value { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--charcoal); }
+  .hero { min-height: 92vh; padding-top: 72px; display: grid; grid-template-columns: 1.1fr 0.9fr; position: relative; overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem 6rem 5rem; position: relative; z-index: 2; }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 300; line-height: 1.08; color: var(--charcoal); margin-bottom: 1.75rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.2s; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 0.97rem; line-height: 1.9; color: #6a7060; max-width: 420px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s; }
   .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s ease forwards 0.6s; }
   .hero-eyebrow { opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s; }
-  .hero-founding { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(217,183,124,0.12); border: 1px solid rgba(217,183,124,0.3); padding: 0.45rem 1rem; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.15s; }
-  .hero-founding span { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); }
-  .hero-founding-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-  /* DIVIDER */
-  .divider { height: 1px; background: linear-gradient(to right, transparent, var(--sage), transparent); margin: 0 5rem; }
+  .hero-right { position: relative; overflow: hidden; background: linear-gradient(150deg, var(--sage) 0%, var(--mist) 45%, var(--blush) 100%); }
+  .hero-right::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--cream) 0%, transparent 18%); z-index: 1; }
+  .hero-photo-area { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; }
+  .hero-photo-placeholder { width: 220px; height: 290px; border: 1px dashed rgba(46,42,36,0.15); display: flex; align-items: center; justify-content: center; }
+  .hero-photo-placeholder span { font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(46,42,36,0.28); text-align: center; line-height: 1.9; padding: 0 1rem; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .hero-watermark { position: absolute; font-family: var(--font-display); font-size: 20rem; font-weight: 300; color: rgba(46,42,36,0.035); bottom: -3rem; right: -1rem; line-height: 1; pointer-events: none; user-select: none; z-index: 1; }
 
-  /* FOR WHO */
-  .forwho { background: var(--white); padding: 7rem 5rem; }
-  .forwho-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-  .forwho-left h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 1.5rem; }
-  .forwho-left h2 em { font-style: italic; color: var(--teal); }
-  .forwho-left p { font-size: 0.95rem; line-height: 1.9; color: #6a7060; margin-bottom: 1rem; }
-  .forwho-right { padding-top: 0.5rem; }
-  .forwho-item { padding: 1.5rem 0; border-bottom: 1px solid var(--mist); }
-  .forwho-item:first-child { border-top: 1px solid var(--mist); }
-  .forwho-item p {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.6;
-    color: #8a7a6a;
-    letter-spacing: 0.01em;
-  }
+  /* WHAT TO EXPECT */
+  .expect { background: var(--white); padding: 7rem 5rem; border-top: 1px solid var(--mist); }
+  .expect-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .expect-left h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 1.5rem; }
+  .expect-left h2 em { font-style: italic; color: var(--teal); }
+  .expect-left p { font-size: 0.95rem; line-height: 1.9; color: #6a7060; margin-bottom: 1rem; }
+  .expect-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .expect-item { display: flex; gap: 1.25rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid var(--mist); }
+  .expect-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .expect-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: var(--gold); opacity: 0.5; line-height: 1; flex-shrink: 0; width: 2rem; }
+  .expect-text strong { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--charcoal); display: block; margin-bottom: 0.3rem; }
+  .expect-text p { font-size: 0.82rem; line-height: 1.7; color: #8a9085; }
 
-  /* THE FRAMEWORK */
-  .framework { background: var(--charcoal); padding: 8rem 5rem; position: relative; overflow: hidden; }
-  .framework::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 80%, rgba(85,119,148,0.1) 0%, transparent 55%); pointer-events: none; }
-  .framework-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
-  .framework-header { max-width: 580px; margin-bottom: 5rem; }
-  .framework-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 1rem; }
-  .framework-header h2 em { font-style: italic; color: var(--blush); }
-  .framework-header p { font-size: 0.92rem; color: rgba(249,247,242,0.45); line-height: 1.85; }
+  /* SIGNATURE TALKS */
+  .talks { background: var(--charcoal); padding: 8rem 5rem; position: relative; overflow: hidden; }
+  .talks::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(85,119,148,0.12) 0%, transparent 55%); pointer-events: none; }
+  .talks-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+  .talks-header { max-width: 580px; margin-bottom: 4rem; }
+  .talks-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 0.75rem; }
+  .talks-header h2 em { font-style: italic; color: var(--blush); }
+  .talks-header p { font-size: 0.92rem; color: rgba(249,247,242,0.5); line-height: 1.8; }
 
-  .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(255,255,255,0.07); }
-  .phase { padding: 2.5rem 2rem; border-right: 1px solid rgba(255,255,255,0.07); position: relative; transition: background 0.3s; }
-  .phase:last-child { border-right: none; }
-  .phase:hover { background: rgba(255,255,255,0.04); }
-  .phase-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 300; color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 1.25rem; display: block; }
-  .phase-label { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.6rem; }
-  .phase-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; font-style: italic; color: var(--cream); display: block; margin-bottom: 0.85rem; line-height: 1.2; }
-  .phase-desc { font-size: 0.8rem; line-height: 1.75; color: rgba(249,247,242,0.38); }
+  .talk-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 3rem; margin-bottom: 1.25rem; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; transition: background 0.3s; }
+  .talk-card:last-child { margin-bottom: 0; }
+  .talk-card:hover { background: rgba(255,255,255,0.07); }
 
-  .framework-note { margin-top: 3rem; padding: 2rem 2.5rem; border: 1px solid rgba(255,255,255,0.07); display: flex; gap: 1.5rem; align-items: center; }
-  .framework-note-icon { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--gold); opacity: 0.5; flex-shrink: 0; }
-  .framework-note p { font-size: 0.82rem; line-height: 1.8; color: rgba(249,247,242,0.4); }
-  .framework-note p em { color: rgba(249,247,242,0.65); font-style: italic; }
+  .talk-left {}
+  .talk-number { font-family: var(--font-display); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+  .talk-course { font-family: var(--font-display); font-size: 2.8rem; font-weight: 300; color: var(--gold); opacity: 0.25; line-height: 1; display: block; margin-bottom: 0.75rem; }
+  .talk-tag { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(249,247,242,0.3); }
 
-  /* DESIGN METHOD */
-  .design-method { display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.07); }
-  .design-row { display: grid; grid-template-columns: 80px 1fr; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.07); transition: background 0.3s; }
-  .design-row:last-child { border-bottom: none; }
-  .design-row:hover { background: rgba(255,255,255,0.04); }
-  .design-letter { font-family: var(--font-display); font-size: 3.8rem; font-weight: 300; color: var(--gold); opacity: 0.55; line-height: 1; text-align: center; padding: 1.75rem 0; border-right: 1px solid rgba(255,255,255,0.07); }
-  .design-content { padding: 1.75rem 2rem; }
-  .design-word { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; font-style: italic; color: var(--cream); display: block; margin-bottom: 0.4rem; }
-  .design-desc { font-size: 0.82rem; line-height: 1.75; color: rgba(249,247,242,0.42); }
+  .talk-right {}
+  .talk-title { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.25; margin-bottom: 1rem; }
+  .talk-desc { font-size: 0.88rem; line-height: 1.85; color: rgba(249,247,242,0.55); margin-bottom: 1.25rem; }
+  .talk-outcomes { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .talk-outcomes li { font-size: 0.8rem; color: rgba(249,247,242,0.4); line-height: 1.6; padding-left: 1rem; position: relative; }
+  .talk-outcomes li::before { content: 'â'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; }
 
-  /* THIS IS DIFFERENT */
-  .different { background: var(--cream); padding: 7rem 5rem; }
-  .different-inner { max-width: 960px; margin: 0 auto; }
-  .different-header { max-width: 560px; margin-bottom: 4rem; }
-  .different-header h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 0.75rem; }
-  .different-header h2 em { font-style: italic; color: var(--teal); }
-  .different-header p { font-size: 0.92rem; color: #6a7060; line-height: 1.85; }
-  .different-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .different-card { padding: 2.25rem 2rem; background: var(--white); }
-  .different-card-eyebrow { font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); display: block; margin-bottom: 0.75rem; }
-  .different-card h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.65rem; line-height: 1.3; }
-  .different-card p { font-size: 0.84rem; line-height: 1.8; color: #6a7060; }
+  /* WHO BOOKS */
+  .who { background: var(--cream); padding: 7rem 5rem; }
+  .who-inner { max-width: 960px; margin: 0 auto; }
+  .who-header { max-width: 560px; margin-bottom: 3.5rem; }
+  .who-header h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 0.75rem; }
+  .who-header h2 em { font-style: italic; color: var(--teal); }
+  .who-header p { font-size: 0.92rem; color: #6a7060; line-height: 1.8; }
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .who-card { background: var(--white); padding: 2rem 1.75rem; border-top: 2px solid transparent; }
+  .who-card:nth-child(1) { border-top-color: var(--teal); }
+  .who-card:nth-child(2) { border-top-color: var(--gold); }
+  .who-card:nth-child(3) { border-top-color: var(--blush-dark); }
+  .who-card h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.75rem; }
+  .who-card p { font-size: 0.84rem; line-height: 1.8; color: #6a7060; }
 
-  /* INVESTMENT */
-  .investment { background: #F0F2EE; padding: 7rem 5rem; }
-  .investment-inner { max-width: 780px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-  .investment-left h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--charcoal); margin-bottom: 1rem; }
-  .investment-left h2 em { font-style: italic; color: var(--teal); }
-  .investment-left p { font-size: 0.92rem; line-height: 1.85; color: #6a7060; margin-bottom: 1rem; }
-  .investment-right { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--mist); background: var(--white); }
-  .investment-item { padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--mist); }
-  .investment-item:last-child { border-bottom: none; }
-  .investment-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(46,42,36,0.35); display: block; margin-bottom: 0.3rem; }
-  .investment-value { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--charcoal); }
-  .investment-value span { font-size: 0.8rem; font-family: var(--font-body); color: #8a9085; font-weight: 300; }
-  .investment-note { font-size: 0.75rem; line-height: 1.7; color: #8a9085; margin-top: 0.25rem; }
+  /* TESTIMONIALS */
+  .proof { background: #F0F2EE; padding: 7rem 5rem; }
+  .proof-inner { max-width: 960px; margin: 0 auto; }
+  .proof-header { margin-bottom: 3rem; }
+  .proof-header h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 2.8vw, 2.6rem); font-weight: 300; color: var(--charcoal); }
+  .proof-header h2 em { font-style: italic; color: var(--teal); }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .proof-card { background: var(--white); padding: 2rem 1.75rem; border-left: 2px solid var(--sage); }
+  .proof-quote { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; line-height: 1.7; color: var(--charcoal); margin-bottom: 1.25rem; }
+  .proof-attr { font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--sage-dark); }
+  .proof-placeholder { background: linear-gradient(135deg, var(--mist) 0%, var(--sage) 100%); display: flex; align-items: center; justify-content: center; min-height: 180px; }
+  .proof-placeholder p { font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(46,42,36,0.28); text-align: center; line-height: 2.2; }
 
-  /* APPLICATION */
-  .application { background: var(--teal); padding: 8rem 5rem; position: relative; overflow: hidden; }
-  .application::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255,255,255,0.07) 0%, transparent 65%); pointer-events: none; }
-  .application-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
-  .application-header { margin-bottom: 3.5rem; }
-  .application-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 1rem; }
-  .application-header h2 em { font-style: italic; color: var(--blush); }
-  .application-header p { font-size: 0.95rem; line-height: 1.9; color: rgba(249,247,242,0.6); }
+  /* BOOKING CTA */
+  .booking { background: var(--teal); padding: 7rem 5rem; position: relative; overflow: hidden; }
+  .booking::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, transparent 65%); pointer-events: none; }
+  .booking-inner { max-width: 780px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+  .booking-left h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.18; color: var(--cream); margin-bottom: 1.25rem; }
+  .booking-left h2 em { font-style: italic; color: var(--blush); }
+  .booking-left p { font-size: 0.95rem; line-height: 1.9; color: rgba(249,247,242,0.65); }
+  .booking-right { display: flex; flex-direction: column; gap: 0.85rem; }
+  .booking-detail { display: flex; flex-direction: column; gap: 0.2rem; padding-bottom: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .booking-detail:last-of-type { border-bottom: none; }
+  .booking-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(249,247,242,0.35); }
+  .booking-value { font-size: 0.88rem; color: rgba(249,247,242,0.75); line-height: 1.6; }
 
-  .app-form { display: flex; flex-direction: column; gap: 1.5rem; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-  .form-group label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(249,247,242,0.45); }
-  .form-group input,
-  .form-group textarea,
-  .form-group select { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; color: var(--cream); outline: none; transition: border-color 0.3s; resize: none; -webkit-appearance: none; }
-  .form-group input::placeholder,
-  .form-group textarea::placeholder { color: rgba(249,247,242,0.25); }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus { border-color: rgba(255,255,255,0.4); }
-  .form-group select option { background: var(--teal-dark); color: var(--cream); }
-  .form-group textarea { min-height: 110px; }
-  .form-note { font-size: 0.75rem; line-height: 1.7; color: rgba(249,247,242,0.35); text-align: center; padding-top: 0.5rem; }
-
-  .btn-light { background: var(--cream); color: var(--charcoal); padding: 1rem 2.5rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; border: none; cursor: pointer; width: 100%; text-align: center; }
+  .btn-light { background: var(--cream); color: var(--charcoal); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; margin-top: 1.75rem; }
   .btn-light:hover { background: var(--gold); transform: translateY(-2px); }
-
-  /* SUCCESS STATE */
-  .form-success { display: none; text-align: center; padding: 3rem 2rem; }
-  .form-success h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 1rem; }
-  .form-success p { font-size: 0.92rem; color: rgba(249,247,242,0.6); line-height: 1.85; }
 
   /* FOOTER */
   footer { background: #211E19; padding: 4.5rem 5rem 3rem; }
@@ -200,258 +166,255 @@
 
   /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-d1 { transition-delay: 0.1s; }
   .reveal-d2 { transition-delay: 0.22s; }
   .reveal-d3 { transition-delay: 0.34s; }
 
   /* RESPONSIVE */
-  @media (max-width: 960px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.25rem; }
-    .hero { padding: 6rem 2rem 4rem; }
-    .forwho,.framework,.different,.investment,.application { padding: 5rem 2rem; }
-    .forwho-inner,.investment-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .phases { grid-template-columns: 1fr 1fr; }
-    .phase { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .different-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { padding: 3rem 2rem 2rem; }
-    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-</style>
+  
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: fixed; top: 57px; left: 0; right: 0; background: rgba(249,247,242,0.98); backdrop-filter: blur(18px); flex-direction: column; gap: 0; padding: 1rem 0 1.5rem; border-bottom: 1px solid rgba(46,42,36,0.08); z-index: 199; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 0.85rem 1.75rem; font-size: 0.72rem; }
+      .nav-links a::after { display: none; }
+      .nav-cta { margin: 0.5rem 1.75rem 0; display: block; text-align: center; padding: 0.7rem 1.3rem !important; }
+    }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 5rem 1.75rem 4rem; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo { max-width: 320px; }
+    }
+    @media (max-width: 640px) {
+      .oam-intro,.personas,.about,.doors,.manifesto,.proof,.final-cta,.whatis,.notaTest,.types,.whyhere,.expect,.talks,.who,.booking { padding: 4rem 1.25rem; }
+      footer { padding: 3rem 1.25rem 2rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .personas-grid,.doors-grid,.proof-grid,.who-grid { grid-template-columns: 1fr; }
+      .whatis-inner,.notaTest-inner,.expect-inner,.booking-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .types-grid { grid-template-columns: 1fr 1fr; }
+      .type-card { border-right: none; border-bottom: 1px solid var(--mist); }
+      .oam-definition-block { padding: 2rem 1.5rem; }
+      .talk-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.25rem; }
+      .whyhere-actions,.final-actions,.hero-actions { flex-direction: column; align-items: flex-start; }
+      .whyhere-actions { align-items: center; }
+      .btn-primary,.btn-secondary { width: 100%; text-align: center; }
+      .cred-strip { gap: 1.5rem; }
+    }
+    @media (max-width: 420px) {
+      .types-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
+    }
+
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">The Overachiever Mom <span>Collective</span></a>
-  <ul class="nav-links">
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="speaking.html">Speaking</a></li>
     <li><a href="oam-human-design.html">Discover Your Design</a></li>
     <li><a href="framework.html">The Framework</a></li>
-    <li><a href="#apply" class="nav-cta">Work With Me</a></li>
+    <li><a href="#book" class="nav-cta">Work With Me</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-founding">
-      <div class="hero-founding-dot"></div>
-      <span>Founding Cohort · Now Accepting Applications</span>
-    </div>
-    <span class="eyebrow hero-eyebrow">The OAM Design Framework</span>
-    <h1>An experience<br>designed around<br><em>who you're becoming.</em></h1>
-    <p class="hero-sub">Not a course. Not a coaching program. A guided design process for the woman who's done surviving her life and ready to build something that actually fits.</p>
-    <div class="hero-details">
-      <div class="hero-detail">
-        <span class="hero-detail-label">Duration</span>
-        <span class="hero-detail-value">10 Weeks</span>
-      </div>
-      <div class="hero-detail">
-        <span class="hero-detail-label">Format</span>
-        <span class="hero-detail-value">1:1 · Intimate</span>
-      </div>
-      <div class="hero-detail">
-        <span class="hero-detail-label">Cohort Size</span>
-        <span class="hero-detail-value">2–3 Women</span>
-      </div>
-    </div>
+  <div class="hero-left">
+    <span class="eyebrow hero-eyebrow">Speaking Â· Boardrooms Â· Corporate Conversations</span>
+    <h1>A voice that speaks<br>from <em>inside</em><br>the experience.</h1>
+    <p class="hero-sub">I bring the conversation about overload, identity, and intentional design to the stages and rooms where it matters most â for the women living it and the organizations ready to engage and retain them.</p>
     <div class="hero-actions">
-      <a href="#apply" class="btn-primary">Apply for the Founding Cohort</a>
-      <a href="#framework" class="btn-secondary">See the Framework</a>
+      <a href="#book" class="btn-primary">Invite Me to Speak</a>
+      <a href="#talks" class="btn-secondary">View Signature Talks</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-area">
+      <img src="jasmine-speaking.jpg" alt="Jasmine Bibb â Speaker" class="hero-img">
+    </div>
+    <div class="hero-watermark">Speak</div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT IN THE ROOM -->
+<section class="expect">
+  <div class="expect-inner">
+    <div class="expect-left reveal">
+      <span class="eyebrow">What to expect</span>
+      <h2>I don't just<br>inspire the room.<br>I <em>equip</em> it.</h2>
+      <p>I speak from lived experience â not theory. Every talk combines personal testimony, research-grounded insight, and practical frameworks that women can carry with them long after the event ends.</p>
+      <p>Audiences don't just leave feeling motivated. They leave with language, perspective, and a next step.</p>
+    </div>
+    <div class="expect-right reveal reveal-d1">
+      <div class="expect-item">
+        <span class="expect-num">01</span>
+        <div class="expect-text">
+          <strong>Testimony, not performance</strong>
+          <p>I speak from inside the experience of the Overachiever Mom â because I am one. That authenticity changes how the message lands.</p>
+        </div>
+      </div>
+      <div class="expect-item">
+        <span class="expect-num">02</span>
+        <div class="expect-text">
+          <strong>Framework, not just feeling</strong>
+          <p>Every talk is grounded in the OAM framework â giving audiences a structure they can return to, not just a moment they remember.</p>
+        </div>
+      </div>
+      <div class="expect-item">
+        <span class="expect-num">03</span>
+        <div class="expect-text">
+          <strong>Permission, not pressure</strong>
+          <p>Women leave with a quiet conviction â not a to-do list. The goal is always clarity over urgency.</p>
+        </div>
+      </div>
+      <div class="expect-item">
+        <span class="expect-num">04</span>
+        <div class="expect-text">
+          <strong>Customized to your room</strong>
+          <p>Every engagement is tailored â whether it's a keynote stage, a corporate offsite, or a boardroom conversation.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- SIGNATURE TALKS -->
+<section class="talks" id="talks">
+  <div class="talks-inner">
+    <div class="talks-header reveal">
+      <span class="eyebrow">Signature talks</span>
+      <h2>Three conversations.<br>One <em>through line.</em></h2>
+      <p>Each talk stands alone â and together they form a curriculum that takes women from awareness to alignment to intentional design.</p>
+    </div>
 
-<!-- FOR WHO -->
-<section class="forwho">
-  <div class="forwho-inner">
-    <div class="forwho-left reveal">
+    <div class="talk-card reveal">
+      <div class="talk-left">
+        <span class="talk-number">Talk One</span>
+        <span class="talk-course">101</span>
+      </div>
+      <div class="talk-right">
+        <h3 class="talk-title">Overload 101 â She's Not Burnt Out. She's Overloaded. There's a Difference.</h3>
+        <p class="talk-desc">This talk reframes the conversation around women's exhaustion â moving it from a personal failing to a systemic pattern. Audiences walk away with language they didn't have before and a new understanding of what's actually been driving the cycle.</p>
+      </div>
+    </div>
+
+    <div class="talk-card reveal reveal-d1">
+      <div class="talk-left">
+        <span class="talk-number">Talk Two</span>
+        <span class="talk-course">101</span>
+      </div>
+      <div class="talk-right">
+        <h3 class="talk-title">Identity 101 â You Were Never Just One Thing. Reclaiming Yourself Beyond the Role.</h3>
+        <p class="talk-desc">What happens when a woman has been defined by her roles for so long that she's lost track of who she is underneath them? This conversation goes there â with honesty, care, and a clear invitation toward something more.</p>
+      </div>
+    </div>
+
+    <div class="talk-card reveal reveal-d2">
+      <div class="talk-left">
+        <span class="talk-number">Talk Three</span>
+        <span class="talk-course">101</span>
+      </div>
+      <div class="talk-right">
+        <h3 class="talk-title">Design 101 â Stop Surviving Your Life. Start Designing It.</h3>
+        <p class="talk-desc">The permission slip talk. This is where awareness becomes action â where women leave not just inspired, but equipped with a framework for designing what comes next on their own terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO BOOKS JASMINE -->
+<section class="who">
+  <div class="who-inner">
+    <div class="who-header reveal">
       <span class="eyebrow">Who this is for</span>
-      <h2>You've built<br>a life. Now<br>let's <em>design</em> one.</h2>
-      <p>The OAM Design Framework is for the woman who has built a life — and is quietly wondering why it still doesn't feel quite right.</p>
-      <p>She's not broken. She's not ungrateful. She's just ready for something more intentional than what she's been running.</p>
+      <h2>The right fit for<br><em>the right room.</em></h2>
+      <p>My work meets audiences where they are â whether that's a stage full of women ready for more, or a boardroom ready to have a different kind of conversation.</p>
     </div>
-    <div class="forwho-right reveal reveal-d1">
-      <div class="forwho-item">
-        <p>You feel the weight of overload — but you've been carrying it so long it just feels like life.</p>
+    <div class="who-grid">
+      <div class="who-card reveal reveal-d1">
+        <h3>Women's Events & Conferences</h3>
+        <p>Leadership summits, empowerment events, professional women's organizations, and conferences where the audience is ready to go deeper than inspiration.</p>
       </div>
-      <div class="forwho-item">
-        <p>You've achieved a lot, and still sense that something essential is missing.</p>
+      <div class="who-card reveal reveal-d2">
+        <h3>Corporate & Organizational</h3>
+        <p>Companies invested in retaining their highest-performing women. ERG events, leadership offsites, DEI programming, and culture conversations that go beyond the surface.</p>
       </div>
-      <div class="forwho-item">
-        <p>You're tired of putting yourself last — and ready to actually do something about it.</p>
-      </div>
-      <div class="forwho-item">
-        <p>You want support that meets you where you are, not a curriculum built for someone else.</p>
-      </div>
-      <div class="forwho-item">
-        <p>You're ready to invest in yourself — not just your career, your family, or the next goal on the list.</p>
+      <div class="who-card reveal reveal-d3">
+        <h3>Faith & Community Spaces</h3>
+        <p>Women's ministries, community organizations, and faith-based events where the conversation around purpose, identity, and intentional living resonates deeply.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE FRAMEWORK -->
-<section class="framework" id="framework">
-  <div class="framework-inner">
-    <div class="framework-header reveal">
-      <span class="eyebrow">The journey</span>
-      <h2>The <em>DESIGN</em> Method.</h2>
-      <p>This is the path you move through inside the OAM Design Framework. Six intentional steps — from naming what you're carrying to building what comes next.</p>
+<!-- TESTIMONIALS -->
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-header reveal">
+      <span class="eyebrow">What organizers & attendees say</span>
+      <h2>The room <em>remembers.</em></h2>
     </div>
-    <div class="design-method reveal reveal-d1">
-      <div class="design-row">
-        <span class="design-letter">D</span>
-        <div class="design-content">
-          <span class="design-word">Define the Overload</span>
-          <p class="design-desc">We name what you're carrying.</p>
-        </div>
+    <div class="proof-grid">
+      <div class="proof-card reveal reveal-d1">
+        <p class="proof-quote">"She doesn't just inspire you â she gives you a real framework to move forward. Jasmine has a way of naming exactly what you've been feeling but couldn't say out loud."</p>
+        <span class="proof-attr">â Add your testimonial here</span>
       </div>
-      <div class="design-row">
-        <span class="design-letter">E</span>
-        <div class="design-content">
-          <span class="design-word">Examine the System</span>
-          <p class="design-desc">You begin to understand the root cause of it all.</p>
-        </div>
+      <div class="proof-card reveal reveal-d2">
+        <p class="proof-quote">"I walked into that room carrying a lot and walked out with clarity. She speaks from inside the experience â and that changes everything about how it lands."</p>
+        <span class="proof-attr">â Add your testimonial here</span>
       </div>
-      <div class="design-row">
-        <span class="design-letter">S</span>
-        <div class="design-content">
-          <span class="design-word">Step Back</span>
-          <p class="design-desc">Experience the intentional pause.</p>
-        </div>
-      </div>
-      <div class="design-row">
-        <span class="design-letter">I</span>
-        <div class="design-content">
-          <span class="design-word">Identify Alignment</span>
-          <p class="design-desc">Understand the blueprint for how you're wired to live.</p>
-        </div>
-      </div>
-      <div class="design-row">
-        <span class="design-letter">G</span>
-        <div class="design-content">
-          <span class="design-word">Generate Possibilities</span>
-          <p class="design-desc">Reimagine life on your terms.</p>
-        </div>
-      </div>
-      <div class="design-row">
-        <span class="design-letter">N</span>
-        <div class="design-content">
-          <span class="design-word">Navigate Forward</span>
-          <p class="design-desc">Apply what you've designed and move forward — with intention, not momentum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="framework-note reveal reveal-d2">
-      <span class="framework-note-icon">"</span>
-      <p>The full details of each step belong to the women inside the program. What you need to know is this — <em>you will not leave the same way you arrived.</em></p>
-    </div>
-  </div>
-</section>
-
-<!-- THIS IS DIFFERENT -->
-<section class="different">
-  <div class="different-inner">
-    <div class="different-header reveal">
-      <span class="eyebrow">What holds you through it</span>
-      <h2>Three things built<br>to carry you —<br>not just <em>guide you.</em></h2>
-      <p>Most programs give you information. This one gives you something to stand on. Each element of the OAM Design Framework was chosen because it does something specific — for you, in you, and with you.</p>
-    </div>
-    <div class="different-grid">
-      <div class="different-card reveal reveal-d1">
-        <span class="different-card-eyebrow">The container</span>
-        <h3>Small by design. Held by intention.</h3>
-        <p>Two to three women. No audience. No performance. Just a space where you can finally tell the truth about what you're carrying — and be met there without judgment. You've spent a long time being everything for everyone. This is the room where you get to just be.</p>
-      </div>
-      <div class="different-card reveal reveal-d2">
-        <span class="different-card-eyebrow">The blueprint</span>
-        <h3>Human Design isn't a label. It's a mirror.</h3>
-        <p>For the first time, you'll understand why certain things have always felt like a drain — and why others have always felt like home. Your chart reveals how you're naturally wired to make decisions, manage energy, and move through the world. Not how you've been conditioned to. How you actually are.</p>
-      </div>
-      <div class="different-card reveal reveal-d3">
-        <span class="different-card-eyebrow">The capstone</span>
-        <h3>You close the journey alone — on purpose.</h3>
-        <p>The solo reflection experience isn't a reward. It's part of the design. After ten weeks of doing the work, you deserve space that belongs only to you — to sit with what you've uncovered, feel what it means, and step forward as the woman you've been designing toward.</p>
+      <div class="proof-placeholder reveal reveal-d3">
+        <p>Your third<br>testimonial<br>goes here</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INVESTMENT -->
-<section class="investment">
-  <div class="investment-inner">
-    <div class="investment-left reveal">
-      <span class="eyebrow">Ready to take the next step?</span>
-      <h2>A space held<br>just for <em>you.</em></h2>
-      <p>The Founding Cohort is intentionally small and intentional to reflect both the intimate nature of the experience and the opportunity to be part of something at the beginning.</p>
-      <p>Founding members help shape what this becomes. That matters to me — and I hope it matters to you too.</p>
+<!-- BOOKING CTA -->
+<section class="booking" id="book">
+  <div class="booking-inner">
+    <div class="booking-left reveal">
+      <span class="eyebrow" style="color: rgba(249,247,242,0.4);">Let's collaborate</span>
+      <h2>Ready to bring this<br>conversation to<br>your <em>room?</em></h2>
+      <p>Whether you're planning an event, building a corporate program, or exploring a partnership â reach out and let's talk about what's possible.</p>
+      <a href="https://tally.so/r/EkLkQq" class="btn-light">Send an Inquiry</a>
     </div>
-    <div class="investment-right reveal reveal-d1">
-      <div class="investment-item">
-        <span class="investment-label">Program Investment</span>
-        <div class="investment-value">$1,000 <span>· Founding Cohort Opportunity</span></div>
-        <p class="investment-note">Payment plans available — we'll discuss during outreach.</p>
+    <div class="booking-right reveal reveal-d1">
+      <div class="booking-detail">
+        <span class="booking-label">Formats available</span>
+        <span class="booking-value">Keynote Â· Workshop Â· Panel Â· Boardroom Session Â· Fireside Chat</span>
       </div>
-      <div class="investment-item">
-        <span class="investment-label">What's included</span>
-        <div class="investment-value" style="font-size: 0.88rem; font-family: var(--font-body); font-weight: 300; line-height: 1.8; color: #6a7060;">Guided 1:1 work · Human Design integration · Capstone solo reflection experience · Direct access to me throughout</div>
+      <div class="booking-detail">
+        <span class="booking-label">Audience size</span>
+        <span class="booking-value">Intimate gatherings to large conference stages</span>
       </div>
-      <div class="investment-item">
-        <span class="investment-label">Cohort size</span>
-        <div class="investment-value">2–3 Women <span>· by application only</span></div>
+      <div class="booking-detail">
+        <span class="booking-label">Location</span>
+        <span class="booking-value">Available for travel Â· Virtual engagements welcome</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- APPLICATION -->
-<section class="application" id="apply">
-  <div class="application-inner">
-    <div class="application-header reveal">
-      <span class="eyebrow" style="color: rgba(249,247,242,0.4);">Apply · Founding Cohort</span>
-      <h2>Tell me a little<br>about <em>you.</em></h2>
-      <p>This isn't a formal application. It's a conversation starter. Share what feels right — I'll review every submission personally and reach out to connect.</p>
-    </div>
-
-    <div id="form-wrap">
-      <form class="app-form reveal reveal-d1" id="app-form" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" placeholder="Your first name" required>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Your last name" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="Where I can reach you" required>
-        </div>
-        <div class="form-group">
-          <label>Tell me a little about who you are</label>
-          <textarea placeholder="Where are you in life right now? What do you do, what does your world look like? No need to be formal — just be honest." required></textarea>
-        </div>
-        <div class="form-group">
-          <label>Why this, why now?</label>
-          <textarea placeholder="What brought you here? What's making this feel like the right moment?" required></textarea>
-        </div>
-        <button type="submit" class="btn-light">I'm Ready — Let's Start the Conversation</button>
-        <p class="form-note">I review every application personally and will be in touch within a few days. This is the beginning of a conversation — not a decision.</p>
-      </form>
-    </div>
-
-    <div class="form-success" id="form-success">
-      <h3>It's in. Thank you.</h3>
-      <p>I'll review your application personally and reach out within a few days. In the meantime — you did something for yourself today. That matters.</p>
+      <div class="booking-detail">
+        <span class="booking-label">Response time</span>
+        <span class="booking-value">All inquiries answered within 48 hours</span>
+      </div>
     </div>
   </div>
 </section>
@@ -480,24 +443,26 @@
       <h4>Connect</h4>
       <ul>
         <li><a href="#">Instagram</a></li>
-        <li><a href="#">To the Woman It May Concern · Podcast</a></li>
+        <li><a href="#">To the Woman It May Concern Â· Podcast</a></li>
         <li><a href="#">Substack</a></li>
-        <li><a href="#apply">Work With Me</a></li>
+        <li><a href="#book">Work With Me</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 The Overachiever Mom Collective · Jasmine Bibb · All rights reserved.</p>
+    <p>Â© 2025 The Overachiever Mom Collective Â· Jasmine Bibb Â· All rights reserved.</p>
     <p>Designing your life with intention.</p>
   </div>
 </footer>
 
-<script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    document.getElementById('form-wrap').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script>const h=document.getElementById('nav-hamburger'),n=document.getElementById('nav-links');if(h){h.addEventListener('click',()=>{h.classList.toggle('open');n.classList.toggle('open');});n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('open');n.classList.remove('open');}));}</script>
 </body>
 </html>
