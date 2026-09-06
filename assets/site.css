@@ -30,6 +30,10 @@ img { display: block; max-width: 100%; }
 button, input { font: inherit; }
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 1000; }
 .skip-link:focus { left: 12px; top: 12px; padding: 10px 14px; background: var(--white); }
+.offer-banner { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 20px; color: #37423d; background: #dfe5dd; font-size: 12px; line-height: 1.4; text-align: center; text-decoration: none; transition: background-color 180ms ease; }
+.offer-banner strong { font-weight: 500; }
+.offer-banner span { color: var(--blue-dark); }
+.offer-banner:hover, .offer-banner:focus-visible { background: #d3ddd1; }
 
 .site-header {
   position: sticky;
